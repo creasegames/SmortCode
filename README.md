@@ -1,4 +1,4 @@
-# SteemCode
+# SmortCode
 My very own programming language
 
 # How to Use
