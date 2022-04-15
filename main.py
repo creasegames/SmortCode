@@ -1,6 +1,5 @@
 import os
 import time
-whiteboard=False
 file = open('main.steem','r')
 def namer(name):
   name=lines[i]
