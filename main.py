@@ -1,6 +1,6 @@
 import os
 import time
-file = open('main.steem','r')
+file = open('main.smort','r')
 def namer(name):
   name=lines[i]
   name = name[0:len(name)-1]
