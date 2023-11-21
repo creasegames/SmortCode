@@ -1,29 +1,43 @@
-import os
 import time
-file = open('main.smort','r')
-def namer(name):
-  name=lines[i]
-  name = name[0:len(name)-1]
-  return name
-lines=[file.readline(),file.readline(),file.readline(),file.readline(),file.readline(),file.readline(),file.readline(),file.readline(),file.readline(),file.readline()]
-print(lines)
-for i in range(10):
-  if lines[i]=='!say\n':
-    i+=1
-    print(lines[i])
-  if lines[i]=='!read\n':
-    i+=1
-    text = open(namer(lines[i]),'r')
-    print(text.read())
-    text.close()
-  if lines[i]=='!edit\n':
-    i+=1
-    text = open(namer(lines[i]),'w')
-    i+=1
-    text.write(lines[i])
-    text.close()
-  if lines[i]=='!clear\n':
-    os.system('clear')
-  if lines[i]=='!pause\n':
-    i+=1
-    time.sleep(float(lines[i]))
+import utils
+
+with open('main.smort') as f: 
+  lines=f.readlines()
+  lines = [i.strip() for i in lines]
+  
+vars={}
+keywords=['say','var','read','edit','clear','pause']
+for i in range(len(lines)):
+  if lines[i][:5]=='!help':
+    word=lines[i][6:]
+    if word not in keywords and word!='':
+      print('Sorry, we do not recognize that keyword.')
+    elif word=='':
+      print('''Smort Code is a powerful, high level, dynamically typed programming language built around Python and the CPython interpreter.\n It offers several useful features which serve a wide range of features. \t it is currently in development, but is constatnly being worked on.
+      ''')
+    elif word=='say':
+      print('!say is a command to print text to the screen.\n Usage: !say Hello World')
+  
+  if lines[i][:4]=='!say':
+    if lines[i][5:] in vars:
+      print(vars[lines[i][5:]])
+    else:
+      print(lines[i][5:])
+
+  if lines[i][:4]=='!var':
+    keyValue=lines[i][5:].split('=')
+    vars[keyValue[0]]=keyValue[1]
+  
+  if lines[i]=='!read':
+    #TODO
+    pass
+  
+  if lines[i]=='!edit':
+    #TODO
+    pass
+    
+  if lines[i]=='!clear':
+    print('\033c')
+    
+  if lines[i][:6]=='!pause':
+    time.sleep(float(lines[i][7:]))
